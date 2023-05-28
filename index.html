@@ -4,10 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>To Do App</title>
 </head>
 <body>
-    
-    
+    <h1>To Do App</h1>
+    <input type="text" id="task" name="task">
+    <select id="priority" name="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    <button type="submit" id="btn" >Add</button>
+    <h3 id="notasks">No Tasks Yet!</h3>
+    <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Task</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody id="tablebody">
+          
+        </tbody>
+      </table>
 </body>
+<script src="script.js"></script>
 </html>
