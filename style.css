@@ -10,7 +10,14 @@ body{
 
 }
 table{
-    margin:auto;}
+    margin: 50px auto;
+    width:500px;
+    border:2px solid grey;
+    border-collapse: collapse;
+}
+th,td{
+    border:1px solid grey;
+}
 .hidden{
     margin:auto;
     display:none;

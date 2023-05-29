@@ -1,4 +1,9 @@
 let tasks = [];
+const priority = {
+  low: 1,
+  medium: 2,
+  high: 3,
+};
 class Task {
   constructor(id, task, priority) {
     this.id = id;
@@ -28,9 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function loadTasks() {
   let tasksTable = "";
-  tasks.forEach((task) => {
-    tasksTable += `<tr><td>${task.id}</td><td>${task.task}</td><td>${task.priority}</td><td><button class="delbtn" onclick="removeTask(${task.id})">Remove</button></td></tr>`;
-  });
+  tasks
+    .sort((t1, t2) => priority[t1.priority] - priority[t2.priority])
+    .forEach((task) => {
+      tasksTable += `<tr><td>${task.id}</td><td>${task.task}</td><td>${task.priority}</td><td><button class="delbtn" onclick="removeTask(${task.id})">Remove</button></td></tr>`;
+    });
   document.querySelector("tbody").innerHTML = tasksTable;
 }
 
