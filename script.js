@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ctrlLayout();
 });
 
-function loadTasks() {
+const loadTasks = function () {
   let tasksTable = "";
   tasks
     .sort((t1, t2) => priority[t1.priority] - priority[t2.priority])
@@ -39,9 +39,9 @@ function loadTasks() {
       tasksTable += `<tr><td>${task.id}</td><td>${task.task}</td><td>${task.priority}</td><td><button class="delbtn" onclick="removeTask(${task.id})">Remove</button></td></tr>`;
     });
   document.querySelector("tbody").innerHTML = tasksTable;
-}
+};
 
-function ctrlLayout() {
+const ctrlLayout = function () {
   if (tasks.length === 0) {
     document.querySelector("#notasks").style.setProperty("display", "block");
     document.querySelector("table").classList += "hidden";
@@ -50,10 +50,10 @@ function ctrlLayout() {
     document.querySelector("table").classList = "";
     loadTasks();
   }
-}
+};
 
-function removeTask(id) {
+const removeTask = function (id) {
   const task = tasks.find((element) => element.id == id);
   task.removeTask();
   ctrlLayout();
-}
+};
