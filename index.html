@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="style.css">
     <title>To Do App</title>
 </head>
-<body>
+<body id="body">
     <h1>To Do App</h1>
+    <input hidden type="number" id="id" name="id">
     <input type="text" id="task" name="task">
     <select id="priority" name="priority">
+        <option disabled selected value="select">Select Priority</option>
         <option value="low">Low</option>
         <option value="medium">Medium</option>
         <option value="high">High</option>
@@ -23,6 +25,7 @@
             <th>Id</th>
             <th>Task</th>
             <th>Priority</th>
+            <th>Edit Task</th>
             <th>Remove Task</th>
           </tr>
         </thead>
