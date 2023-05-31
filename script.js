@@ -23,19 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let taskName = document.querySelector("#task").value;
     let taskPriority = document.querySelector("#priority").value;
     if (validateTask(taskName, taskPriority)) {
-      if (document.querySelector("#btn").innerHTML === "Update") {
-        const task = tasks.find(
-          (element) => element.id == document.querySelector("#id").value
-        );
-        task.task = taskName;
-        task.priority = taskPriority;
-        document.querySelector("#btn").innerHTML = "Add";
-        ctrlLayout();
-      } else {
-        const task = new Task(tasks.length + 1, taskName, taskPriority);
-        task.addTask();
-        ctrlLayout();
-      }
+      const task = new Task(tasks.length + 1, taskName, taskPriority);
+      task.addTask();
+      ctrlLayout();
     } else {
       alert("Enter Valid Task name and priority");
     }
@@ -48,7 +38,7 @@ const loadTasks = function () {
   tasks
     .sort((t1, t2) => priority[t1.priority] - priority[t2.priority])
     .forEach((task) => {
-      tasksTable += `<tr><td>${task.id}</td><td>${task.task}</td><td>${task.priority}</td><td><button class="editbtn" onclick="editTask(${task.id})">Edit</button></td><td><button class="delbtn" onclick="removeTask(${task.id})">Remove</button></td></tr>`;
+      tasksTable += `<tr id="task${task.id}"><td>${task.id}</td><td>${task.task}</td><td>${task.priority}</td><td><button class="editbtn" onclick="editTask(${task.id})">Edit</button></td><td><button class="delbtn" onclick="removeTask(${task.id})">Remove</button></td></tr>`;
     });
   document.querySelector("tbody").innerHTML = tasksTable;
 };
@@ -72,12 +62,34 @@ const removeTask = function (id) {
 
 const editTask = function (id) {
   const task = tasks.find((element) => element.id == id);
-  document.querySelector("#btn").innerHTML = "Update";
-  document.querySelector("#id").value = id;
-  document.querySelector("#task").value = task.task;
-  document.querySelector("#priority").value = task.priority;
+  document.querySelector(
+    `#task${task.id}`
+  ).innerHTML = `<td>${task.id}</td><td><input type="text" id="modtask" name="task" value="${task.task}"></td><td><select id="modpriority" name="priority">
+  <option disabled selected value="select">Select Priority</option>
+  <option value="low">Low</option>
+  <option value="medium">Medium</option>
+  <option value="high">High</option>
+</select></td><td><button class="updatebtn" onclick="updateTask(${task.id})">Update</button></td><td><button class="cancelbtn" onclick="cancel(${task.id})">Cancel</button></td>`;
+};
+
+const cancel = function (id) {
+  const task = tasks.find((element) => element.id == id);
+  document.querySelector(
+    `#task${task.id}`
+  ).innerHTML = `<td>${task.id}</td><td>${task.task}</td><td>${task.priority}</td><td><button class="editbtn" onclick="editTask(${task.id})">Edit</button></td><td><button class="delbtn" onclick="removeTask(${task.id})">Remove</button></td>`;
 };
 
 const validateTask = function (taskName, taskPriority) {
   return taskName && ["low", "medium", "high"].includes(taskPriority);
+};
+
+const updateTask = function (id) {
+  const task = tasks.find((element) => element.id == id);
+  let taskName = document.querySelector("#modtask").value;
+  let taskPriority = document.querySelector("#modpriority").value;
+  if (validateTask(taskName, taskPriority)) {
+    task.task = taskName;
+    task.priority = taskPriority;
+    ctrlLayout();
+  }
 };
