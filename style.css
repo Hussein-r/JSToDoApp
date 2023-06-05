@@ -7,11 +7,10 @@ body{
     height:30px;
     width:200px;
     box-sizing: border-box;
-
 }
 table{
     margin: 50px auto;
-    width:500px;
+    width:700px;
     border:2px solid grey;
     border-collapse: collapse;
 }
@@ -23,3 +22,14 @@ th,td{
     display:none;
 }
 
+#delSelBtn{
+    height:30px;
+    width:200px;
+    box-sizing: border-box;
+    margin:auto;
+    color:white;
+    font-size: large;
+    background-color: rgb(151, 26, 26);
+    border: none;
+
+}
